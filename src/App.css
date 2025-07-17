@@ -1,0 +1,188 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+html,body{
+  height: 100%;
+  width: 100%;
+    background:#fff;
+}
+#img{
+  transform: translate(-50% , 0%);
+}
+#name {
+    transform: translate(2%, 0%);
+    letter-spacing: 1px;
+    
+
+    font-size: 3rem;                     /* Bigger text */
+    font-weight: 700;                    /* Bold */
+    font-family: 'Segoe UI', sans-serif; /* Professional font */
+    color: fff;                      /* Neon Blue */
+    text-shadow: 
+        0 0 5px #00f6ff,
+        0 0 10px #00d0ff,
+        0 0 20px #00aaff,
+        0 0 30px #0088ff;                /* Glow effect */
+
+    animation: pulseRotate 3s ease-in-out infinite;
+}
+#name a{
+  margin-top: -10px;
+}
+
+.login{
+  color: black;
+}
+/* App.css or Shimmerui.css */
+/* App.css or Shimmer.css */
+.App {
+  background-color: #191e24;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shimmer {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+  text-shadow: 0 0 10px #00f6ff, 0 0 20px #00f6ff;
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+#footer{
+  height: 40px;
+}
+/* Center container */
+/* ====== Base Setup ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f3f4f6;
+}
+
+/* ====== Center Container ====== */
+.login-container {
+
+
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: #f3f4f6;
+}
+
+/* ====== Login Card ====== */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(107, 114, 128, 0.2); /* Gray soft shadow */
+  animation: fadeInUp 0.6s ease-in-out;
+}
+
+/* ====== Title ====== */
+.login-title {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1f2937;
+}
+
+/* ====== Inputs ====== */
+.login-input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background-color: #f9fafb;
+  color: black;
+  transition: 0.3s ease;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #4b5563;
+  box-shadow: 0 0 0 3px rgba(156, 163, 175, 0.3);
+}
+
+/* ====== Button ====== */
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #1f2937;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #111827;
+  box-shadow: 0 4px 12px rgba(17, 24, 39, 0.3);
+}
+
+/* ====== Footer Text ====== */
+.login-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.login-footer a {
+  color: #1f2937;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ====== Animation ====== */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+input{
+  background-color: #191e24;
+}
+.btn{
+ 
+}

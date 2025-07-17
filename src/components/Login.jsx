@@ -1,0 +1,69 @@
+import { useState } from "react"
+import axios from 'axios';
+import { useDispatch } from "react-redux";
+import { addUsers } from "../redux/userslice";
+
+
+const Login = ()=>{
+
+    const [Isemail , setEmail] = useState('')
+    const [Ispassward , setpassward] = useState('')
+    const [Issignup , setIssignup] = useState(false)
+const dispatch = useDispatch()
+    const HandleLogin = async(e)=>{
+      e.preventDefault();
+    try{
+  const result = await axios.post('http://localhost:3000/login',{
+    email:Isemail,
+    passward:Ispassward
+  } ,{withCredentials:true});
+      console.log(result.data);
+      dispatch(addUsers(result.data))
+    }catch(err){
+  console.error(err.message);
+    }
+    }
+    return(
+        
+  <div className="login-container">
+      <div className="login-card">
+        <h2 className="login-title">Login</h2>
+        <form className="login-form">
+       <input
+            type="name"
+            placeholder="Enter your FullName"
+            className="login-input"
+            value={Isemail}
+            required
+            onChange={(e)=>{setEmail(e.target.value)}}
+          /> 
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="login-input"
+            value={Isemail}
+            required
+            onChange={(e)=>{setEmail(e.target.value)}}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="login-input"
+            value={Ispassward}
+            required
+            onChange={(e)=>setpassward(e.target.value)}
+          />
+
+          <button onClick={HandleLogin} type="submit" className="login-button">
+            Log in
+          </button>  
+        </form>
+        <p className="login-footer">
+          Don’t have an account? <a href="/signup">Sign up</a>
+        </p>
+      </div>
+    </div>
+    )
+}
+
+export default Login
