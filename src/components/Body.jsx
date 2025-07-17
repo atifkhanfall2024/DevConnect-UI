@@ -5,7 +5,6 @@ import Footer from "./Footer"
 const Body = ()=>{
     return(
         <div>
-       
         <Header/>
         <Outlet/>
         <Footer/>

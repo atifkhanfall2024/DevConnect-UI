@@ -67,6 +67,7 @@ html,body{
 }
 #footer{
   height: 40px;
+ 
 }
 /* Center container */
 /* ====== Base Setup ====== */
@@ -153,7 +154,7 @@ body {
 
 /* ====== Footer Text ====== */
 .login-footer {
-  margin-top: 20px;
+
   text-align: center;
   font-size: 14px;
   color: #6b7280;
@@ -183,6 +184,14 @@ body {
 input{
   background-color: #191e24;
 }
-.btn{
- 
+#wlcm{
+ transform: translate(-35% ,0%);
+}
+#btns{
+  transform: translate(-30%);
+  padding: 5px 5px 2px 2px;
+  font-weight: 500;
+}
+#nm{
+  transform: translate(-10%);
 }

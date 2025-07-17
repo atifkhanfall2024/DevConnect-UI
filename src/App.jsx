@@ -5,6 +5,7 @@ import Shimmer from './components/Shimmerui'
 import Body from './components/Body'
 import './App.css'
 import { Provider } from 'react-redux'
+import Feed from './components/Feed'
 import appStore from './redux/appstore'
 function App() {
 const [loading, setLoading] = useState(() => {
@@ -34,6 +35,7 @@ const [loading, setLoading] = useState(() => {
  <Routes>
   
  <Route path='/' element={<Body/>}>
+ <Route path='/' element={<Feed/>}/>
 <Route path='/login' element={<Login/>}/>
 
 </Route>
