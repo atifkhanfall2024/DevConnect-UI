@@ -32,14 +32,7 @@ const dispatch = useDispatch()
       <div className="login-card">
         <h2 className="login-title">Login</h2>
         <form className="login-form">
-       <input
-            type="name"
-            placeholder="Enter your FullName"
-            className="login-input"
-            value={Isemail}
-            required
-            onChange={(e)=>{setEmail(e.target.value)}}
-          /> 
+     
           <input
             type="email"
             placeholder="Enter your email"
