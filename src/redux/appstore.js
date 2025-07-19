@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import UserSlice from './userslice'
+import Toggle from "./toggle";
 const appStore = configureStore({
     reducer:{
-        user: UserSlice
+        user: UserSlice,
+       toggle:Toggle
     }
 })
 

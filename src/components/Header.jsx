@@ -1,11 +1,40 @@
 import { useGSAP } from "@gsap/react"
+import axios from "axios"
 import gsap from "gsap"
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
+import { BaseUrl } from "../Utils/constant"
+import { removeUser } from "../redux/userslice"
 
 const Header = ()=>{
      const user = useSelector((store)=>store.user)
-     console.log(user);
+     const toggle = useSelector((store)=> store.toggle)
+
+     console.log('selector ' , toggle);
+    
+     const dispatch = useDispatch()
+     const navigate  = useNavigate() //console.log(user);
+   
+    
+
+  async function HandleLogout() {
+  //console.log('hi logout');
+  try {
+    const result = await axios.post(BaseUrl + '/logout', {}, {
+      withCredentials: true,
+    });
+
+    dispatch(removeUser());
+    console.log(result.data);
+  } catch (err) {
+    if (err?.response?.status === 401) {
+      navigate('/login');
+    }
+    console.log(err.message);
+  }
+}
+
   const [Isbutton , setIsbutton] = useState(true)
     useGSAP(()=>{
   gsap.from("#name", {
@@ -32,21 +61,21 @@ const Header = ()=>{
 <div className="navbar bg-base-200 shadow-sm">
   {/* Logo */}
   <div id="name" className="flex-1">
-    <a className="btn btn-ghost text-xl mx-20">DevConnect 👨‍💻</a>
+    <Link to='/'><a className="btn btn-ghost text-xl mx-20">DevConnect 👨‍💻</a></Link>
   </div>
 
   {/* Right-side Button / Avatar */}
   <div className="flex items-center gap-4 mx-4">
     
     {/* 🚀 Get Started Button (only if not logged in) */}
-    {!user && (
-      <button id="btns"
+    {!user &&  (
+     <Link to={toggle ? "/login" : "/signup"}> <button  id="btns"
         className="px-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold shadow-md
                    hover:shadow-lg hover:scale-[1.02] active:scale-100
                    transition duration-300 ease-in-out transform-gpu"
       >
-        Signup
-      </button>
+       {toggle ? 'Login':'Signup'} 
+      </button></Link>
     )}
 
     {/* 👤 Avatar Dropdown (if user is logged in) */}
@@ -73,16 +102,16 @@ const Header = ()=>{
         {/* Dropdown Menu */}
         <ul
           tabIndex={0}
-          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-10 w-52 p-5 shadow"
         >
-          <li>
+          <Link to= '/profile'><li>
             <a className="justify-between">
               Profile
-              <span className="badge">New</span>
+             
             </a>
-          </li>
+          </li></Link>
           <li><a>Settings</a></li>
-          <li><a>Logout</a></li>
+          <Link to='/login' onClick={HandleLogout}><li>Logout</li></Link>
         </ul>
       </div>
     )}

@@ -7,6 +7,8 @@ import './App.css'
 import { Provider } from 'react-redux'
 import Feed from './components/Feed'
 import appStore from './redux/appstore'
+import Profile from './components/profile'
+import Signup from './components/Signup'
 function App() {
 const [loading, setLoading] = useState(() => {
     // Check if shimmer was already shown in this session
@@ -37,6 +39,8 @@ const [loading, setLoading] = useState(() => {
  <Route path='/' element={<Body/>}>
  <Route path='/' element={<Feed/>}/>
 <Route path='/login' element={<Login/>}/>
+<Route path='/signup' element={<Signup/>}/>
+<Route path='/profile' element={<Profile/>} />
 
 </Route>
  </Routes>

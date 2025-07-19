@@ -2,16 +2,26 @@ import { useState } from "react"
 import axios from 'axios';
 import { useDispatch } from "react-redux";
 import { addUsers } from "../redux/userslice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BaseUrl } from "../Utils/constant";
+import { toggle } from "../redux/toggle";
 
 const Login = ()=>{
 
     const [Isemail , setEmail] = useState('')
     const [Ispassward , setpassward] = useState('')
+ 
+
    
     const navigate = useNavigate()
 const dispatch = useDispatch()
+
+   function Handlesignup(e){
+              e.preventDefault()
+          dispatch(toggle(true))
+          navigate('/signup')
+   }
+ 
     const HandleLogin = async(e)=>{
       e.preventDefault();
     try{
@@ -55,7 +65,7 @@ const dispatch = useDispatch()
           </button>  
         </form>
         <p className="login-footer">
-          Don’t have an account? <a href="/signup">Sign up</a>
+        Don’t have an account? <a onClick={Handlesignup}>signup</a>
         </p>
       </div>
     </div>
