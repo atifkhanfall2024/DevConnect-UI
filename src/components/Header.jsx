@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { BaseUrl } from "../Utils/constant"
 import { removeUser } from "../redux/userslice"
 
+
 const Header = ()=>{
      const user = useSelector((store)=>store.user)
      const toggle = useSelector((store)=> store.toggle)
@@ -16,7 +17,7 @@ const Header = ()=>{
      const dispatch = useDispatch()
      const navigate  = useNavigate() //console.log(user);
    
-    
+   
 
   async function HandleLogout() {
   //console.log('hi logout');
@@ -58,7 +59,7 @@ const Header = ()=>{
     })
     return(
  <>
-<div className="navbar bg-base-200 shadow-sm">
+<div className="navbar sticky top-0 z-50  bg-base-200 shadow-sm">
   {/* Logo */}
   <div id="name" className="flex-1">
     <Link to='/'><a className="btn btn-ghost text-xl mx-20">DevConnect 👨‍💻</a></Link>
@@ -105,7 +106,7 @@ const Header = ()=>{
           className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-10 w-52 p-5 shadow"
         >
           <Link to= '/profile'><li>
-            <a className="justify-between">
+            <a  className="justify-between">
               Profile
              
             </a>

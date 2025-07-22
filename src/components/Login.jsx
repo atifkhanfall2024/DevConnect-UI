@@ -10,6 +10,7 @@ const Login = ()=>{
 
     const [Isemail , setEmail] = useState('')
     const [Ispassward , setpassward] = useState('')
+    const [Error , setError] = useState('')
  
 
    
@@ -33,7 +34,8 @@ const dispatch = useDispatch()
       dispatch(addUsers(result.data))
       navigate('/')
     }catch(err){
-  console.error(err.message);
+      setError(err?.response?.data || 'Error : Invalid Cradentials')
+  console.error(err?.response?.message);
     }
     }
     return(
@@ -59,13 +61,14 @@ const dispatch = useDispatch()
             required
             onChange={(e)=>setpassward(e.target.value)}
           />
-
-          <button onClick={HandleLogin} type="submit" className="login-button">
+        
+          <p className="text-red-500 -translate-y-3 text-center">{Error}</p>
+          <button onClick={HandleLogin}  className="login-button">
             Log in
           </button>  
         </form>
         <p className="login-footer">
-        Don’t have an account? <a onClick={Handlesignup}>signup</a>
+        Don’t have an account? <a style={{cursor:'pointer'}} onClick={Handlesignup}>signup</a>
         </p>
       </div>
     </div>

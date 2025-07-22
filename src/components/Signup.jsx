@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BaseUrl } from "../Utils/constant";
 
+
 const Signup = () => {
+  const [Error , setError] = useState('')
+  const navigate = useNavigate()
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
@@ -16,10 +19,11 @@ const Signup = () => {
     skills: "",
   });         
            async  function Submit(e){
-            e.preventDefault()
+            console.log('hello signup');
+            e.preventDefault();
               try{
            const  res = await axios.post(BaseUrl + '/signup' , {
-         
+              
              firstName: formData.name,
             email:formData.email,
             passward : formData.password,
@@ -29,8 +33,10 @@ const Signup = () => {
             skills:formData.skills
          })
          console.log(res.data);
+         navigate('/login')
         }
          catch(err){
+          setError(err?.response?.data)
           console.log(err.message);
          }
            
@@ -156,9 +162,10 @@ const Signup = () => {
               />
             </>
           )}
-
+    <p className="text-red-500 -translate-y-3 text-center">{Error}</p>
           <div className="flex justify-between gap-4">
             {/* ✅ Back Button shown only after step 1 */}
+         
             {step > 1 && (
               <button
                 type="button"
@@ -169,13 +176,13 @@ const Signup = () => {
                 Back
               </button>
             )}
-
+           
             <button
               type="submit"
               className={`w-full ${step > 1 ? "w-1/2" : "w-full"} login-button`}
               style={{transform:'translate(0% , 20%)'}}
             >
-              {step < 3 ? ( "Next") :(<Link to = '/login'>{onclick = {Submit}} Sign Up</Link>) }
+              {step < 3 ? ( "Next") :(<Link to = '/login' onClick = {Submit} >Sign Up</Link>) }
             </button>
           </div>
         </form>

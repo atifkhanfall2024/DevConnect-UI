@@ -1,6 +1,13 @@
+import { useSelector } from "react-redux"
+import EditProfile from "./EditProfile"
+import UserCard from "./Card"
+
 const Profile = ()=>{
     return(
-        <h1 className="text-black">This is profile page</h1>
+        <>
+        <EditProfile/>
+       
+        </>
     )
 }
 export default Profile

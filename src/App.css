@@ -7,7 +7,8 @@
 html,body{
   height: 100%;
   width: 100%;
-    background:#fff;
+  background-color: #f3f4f6; /* subtle gray for outer background */
+  font-family: 'Inter', sans-serif;
 }
 #img{
   transform: translate(-50% , 0%);
@@ -231,4 +232,45 @@ input{
 }
 #namee{
  transform: translate(0%,50%);
+}
+#crd{
+  transform: translate(0% , 20%);
+  /* clean white */
+  border-radius: 16px;
+  
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.516); /* premium soft shadow */
+  transition: box-shadow 0.3s ease;
+}
+#crd:hover{
+   
+}
+#cbtn{
+  margin-top: 15px;
+  margin-left: -40px;
+  height: 40px;
+  width: 80px;
+}
+#cbtns{
+    margin-top: 15px;
+ 
+  height: 40px;
+  width: 80px;
+}
+#two{
+  margin-left: 50px;
+  transform: translate(0% , -10%);
+}
+#logo h2{
+  transform: translate(0% , -70%);
+}
+#input-name{
+  transform: translate(0% , -70%);
+}
+#input-about{
+    transform: translate(0% , -55%);
+}
+#anim{
+  transform: translate(0% , 120%);
 }

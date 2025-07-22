@@ -9,6 +9,7 @@ import Feed from './components/Feed'
 import appStore from './redux/appstore'
 import Profile from './components/profile'
 import Signup from './components/Signup'
+import Forgot from './components/Forgotpass'
 function App() {
 const [loading, setLoading] = useState(() => {
     // Check if shimmer was already shown in this session
@@ -41,6 +42,7 @@ const [loading, setLoading] = useState(() => {
 <Route path='/login' element={<Login/>}/>
 <Route path='/signup' element={<Signup/>}/>
 <Route path='/profile' element={<Profile/>} />
+<Route path='/forgotpassward' element = {<Forgot/>}/>
 
 </Route>
  </Routes>
