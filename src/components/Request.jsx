@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BaseUrl } from "../Utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequest } from "../redux/Requestslice";
+import { addRequest, removeRequest } from "../redux/Requestslice";
 import { useEffect } from "react";
 import No from "./NoFriend";
 
@@ -11,6 +11,21 @@ const Request = ()=>{
     const request = useSelector((store)=>store.request)
 
     console.log(request , 'req page');
+
+     
+    // handle to accept or reject
+
+    const ReviewRequest = async(status , _id)=>{
+              try{
+                const res = await axios.post(BaseUrl + '/request/review/'+ status + '/'+ _id ,{} ,{withCredentials:true})
+
+                console.log(res.data);
+                dispatch(removeRequest(_id))
+              }catch(err){
+                console.log(err.messgae);
+              }
+    }
+
 
     const RequestConnections = async()=>{
         //  console.log('request page');
@@ -32,7 +47,7 @@ const Request = ()=>{
          RequestConnections()
     }, [])
 
-    if(!request) return ;
+    if(!request) return <No/>;
 
     if(request.length == 0) return <No/>
     
@@ -72,8 +87,8 @@ const Request = ()=>{
         {/* Right: Friend Image */}
       
   <div className="flex flex-col gap-2 m-1">
-  <button className=" btn btn-active btn-secondary "> Accept Request </button>
-  <button className="btn btn-active btn-primary"> Reject Request </button>
+  <button className=" btn btn-active btn-secondary " onClick={()=> ReviewRequest('accepted' , connect._id)}> Accept Request </button>
+  <button className="btn btn-active btn-primary" onClick={()=> ReviewRequest('rejected' , connect._id)}> Reject Request </button>
 </div>
 
 

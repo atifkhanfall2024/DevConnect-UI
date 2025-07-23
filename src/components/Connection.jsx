@@ -49,7 +49,7 @@ const Connections = ()=>{
 
     {connections.map((connect, index) => (
       <div
-        key={index}    style={{ backgroundColor: '#191e24' , border: '3px solid green' ,padding:'2px' }}
+        key={index}    style={{ backgroundColor: '#191e24' , border: '3px solid green' ,padding:'2px', margin:'2px' }}
         className="flex  justify-between items-center gap-4 bg-gray-50 hover:bg-gray-100 p-4 mb-4 rounded-md shadow-sm cursor-pointer transition-all duration-300"
         onClick={() => console.log("Open profile of", connect.firstName)} // Replace with navigation if needed
       >
