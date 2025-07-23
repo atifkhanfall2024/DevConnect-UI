@@ -111,7 +111,7 @@ const Header = ()=>{
              
             </a>
           </li></Link>
-          <li><a>Settings</a></li>
+          <li><Link to='/connections'>Connections</Link></li>
           <Link to='/login' onClick={HandleLogout}><li>Logout</li></Link>
         </ul>
       </div>

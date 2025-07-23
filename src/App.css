@@ -274,3 +274,25 @@ input{
 #anim{
   transform: translate(0% , 120%);
 }
+.typing-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid red;
+  box-sizing: border-box;
+  animation: typing 4s steps(40, end) forwards, blink 0.75s step-end infinite;
+  max-width: 100vw; /* ensures it never exceeds screen width */
+}
+
+/* Define exactly how wide the text should animate */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% } /* Or use a safe width like 30ch */
+}
+
+/* Blinking cursor */
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
