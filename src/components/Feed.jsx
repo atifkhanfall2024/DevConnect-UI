@@ -30,7 +30,7 @@ const Feed  = ()=>{
     return(
   
          feed &&(
-     <UserCard user = {feed[1]}/>
+     <UserCard user = {feed[0]}/>
          )
     )
 }

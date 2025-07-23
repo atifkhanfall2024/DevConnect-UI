@@ -40,7 +40,7 @@ const Connections = ()=>{
         <>
         <div>
                <h2 style={{transform:"translate(0% , 40%)"}} className="text-2xl font-bold text-center text-green-400 mb-2 ">
-      Connections
+      Friends 🟢
     </h2>
         </div>
 <div   className="w-full flex justify-center items-center  bg-gray-100 px-4 translate-y-10">
@@ -49,8 +49,8 @@ const Connections = ()=>{
 
     {connections.map((connect, index) => (
       <div
-        key={index}    style={{ backgroundColor: '#191e24'  }}
-        className="flex justify-between items-center gap-4 bg-gray-50 hover:bg-gray-100 p-4 mb-4 rounded-md shadow-sm cursor-pointer transition-all duration-300"
+        key={index}    style={{ backgroundColor: '#191e24' , border: '3px solid green' ,padding:'2px' }}
+        className="flex  justify-between items-center gap-4 bg-gray-50 hover:bg-gray-100 p-4 mb-4 rounded-md shadow-sm cursor-pointer transition-all duration-300"
         onClick={() => console.log("Open profile of", connect.firstName)} // Replace with navigation if needed
       >
         {/* Left: Friend Info */}

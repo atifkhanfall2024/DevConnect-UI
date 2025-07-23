@@ -111,7 +111,8 @@ const Header = ()=>{
              
             </a>
           </li></Link>
-          <li><Link to='/connections'>Connections</Link></li>
+           <li><Link to='/requests'> Friend Request</Link></li>
+          <li><Link to='/connections'>Friends</Link></li>
           <Link to='/login' onClick={HandleLogout}><li>Logout</li></Link>
         </ul>
       </div>
