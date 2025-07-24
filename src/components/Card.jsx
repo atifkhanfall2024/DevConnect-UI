@@ -1,7 +1,24 @@
 
+import axios from "axios";
 import { motion } from "framer-motion";
+import { BaseUrl } from "../Utils/constant";
+import { useDispatch } from "react-redux";
+import { removefeed } from "../redux/Feedslice";
 
 const UserCard = ( {user} ) => {
+
+  const dispatch = useDispatch()
+
+  const Handlesender = async(status , userid)=>{
+     
+           try{
+                 const res = await axios.post(BaseUrl + '/request/send/' + status + '/' + userid ,{} ,{withCredentials:true})
+
+                 dispatch(removefeed(user._id))
+           }catch(err){
+            console.log(err.message);
+           }
+  }
  
  const {age} = user
 console.log(user+ 'cards')
@@ -40,10 +57,10 @@ console.log(user+ 'cards')
 
         {/* Buttons */}
         <div id="two" className="mt-10 flex justify-center gap-5 flex-wrap">
-          <button id="cbtn" className="bg-gradient-to-r from-pink-500 to-red-400 hover:from-pink-600 hover:to-red-500 text-white px-6 py-3 text-sm font-semibold rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+          <button id="cbtn" className="bg-gradient-to-r from-pink-500 to-red-400 hover:from-pink-600 hover:to-red-500 text-white px-6 py-3 text-sm font-semibold rounded-full shadow-lg transition duration-300 transform hover:scale-105" onClick={()=> Handlesender('interested' , user._id)}>
             Interested
           </button>
-          <button  id="cbtns"      className="bg-gray-900 hover:bg-gray-700 text-white px-6 py-3 text-sm font-semibold rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+          <button  id="cbtns"      className="bg-gray-900 hover:bg-gray-700 text-white px-6 py-3 text-sm font-semibold rounded-full shadow-lg transition duration-300 transform hover:scale-105" onClick={()=> Handlesender('ignore' , user._id)}>
             Ignore
           </button>
         </div>

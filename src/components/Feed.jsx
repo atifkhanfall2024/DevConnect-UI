@@ -27,6 +27,10 @@ const Feed  = ()=>{
         GetData()
     },[])
 
+    if(!feed) return 
+
+    if(feed.length <= 0) return <h1 style={{marginTop:"40px"}} className="text-red-400 text-center mt-8 bold
+    ">NO USER FOUND 😔</h1>
     return(
   
          feed &&(

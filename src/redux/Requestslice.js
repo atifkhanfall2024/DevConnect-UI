@@ -9,7 +9,8 @@ const RequestSlice = createSlice({
                return actions.payload
         },
         removeRequest:(state , actions)=>{
-                return null
+            const reqarr = state.filter((s)=> s._id !== actions.payload)
+            return reqarr
         }
     }
 })
