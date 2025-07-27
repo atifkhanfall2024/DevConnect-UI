@@ -46,9 +46,7 @@ console.log(user+ 'cards')
         </p>
 
        <div className="mt-5 text-sm text-gray-700 space-y-1">
-      { age &&<p>
-           Age:<strong>{user.age} </strong> 
-          </p>}
+     
           <p> 
           
           </p>
