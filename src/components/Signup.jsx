@@ -1,12 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BaseUrl } from "../Utils/constant";
 
-
 const Signup = () => {
-  const [Error , setError] = useState('')
-  const navigate = useNavigate()
+  const [Error, setError] = useState("");
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
@@ -17,36 +16,33 @@ const Signup = () => {
     about: "",
     photoUrl: "",
     skills: "",
-  });         
-           async  function Submit(e){
-            console.log('hello signup');
-            e.preventDefault();
-              try{
-           const  res = await axios.post(BaseUrl + '/signup' , {
-              
-             firstName: formData.name,
-            email:formData.email,
-            passward : formData.password,
-            age:formData.age,
-            gender:formData.gender,
-            photo:formData.photoUrl,
-            skills:formData.skills
-         })
-         console.log(res.data);
-         navigate('/login')
-        }
-         catch(err){
-          setError(err?.response?.data)
-          console.log(err.message);
-         }
-           
-          }
-           
+  });
+
+  async function Submit(e) {
+    e.preventDefault();
+    console.log("hello signup");
+    try {
+      const res = await axios.post(BaseUrl + "/signup", {
+        firstName: formData.name,
+        email: formData.email,
+        passward: formData.password,
+        age: formData.age,
+        gender: formData.gender,
+        photo: formData.photoUrl,
+        skills: formData.skills,
+        about: formData.about,
+      });
+      console.log(res.data);
+      navigate("/login");
+    } catch (err) {
+      setError(err?.response?.data);
+      console.log(err.message);
+    }
+  }
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -54,7 +50,6 @@ const Signup = () => {
     else alert("Signup completed!");
   };
 
-  // ✅ Handle going back to previous step
   const handleBack = () => {
     if (step > 1) setStep(step - 1);
   };
@@ -65,21 +60,22 @@ const Signup = () => {
     <div id="signup" className=" flex items-center justify-center">
       <div className="bg-white  rounded-lg shadow-md  ">
         <h2 id="namee" className="login-title mt-2">Sign Up</h2>
-        <form onSubmit={handleNext} className="space-y-4">
+
+        {/* ✅ FORM with conditional submission */}
+        <form onSubmit={step < 3 ? handleNext : Submit} className="space-y-4">
           {step === 1 && (
             <>
-             <input
-             id="input"
-            type="text"
-            name="name"
-            placeholder="Enter your FullName"
-            className="login-input"
-              value={formData.name}
+              <input
+                id="input"
+                type="text"
+                name="name"
+                placeholder="Enter your FullName"
+                className="login-input"
+                value={formData.name}
                 onChange={handleChange}
-            required
-            
-          />
-    
+                required
+              />
+
               <input
                 id="input"
                 type="email"
@@ -106,7 +102,7 @@ const Signup = () => {
           {step === 2 && (
             <>
               <input
-              id="input"
+                id="input"
                 type="number"
                 placeholder="Enter your age"
                 name="age"
@@ -125,16 +121,15 @@ const Signup = () => {
                 onChange={handleChange}
                 required
               />
-            <textarea
-  id="input"
-  name="about"
-  placeholder="Tell us about yourself"
-  className="login-textarea"
-  value={formData.about}
-  onChange={handleChange}
-  required
-></textarea>
-
+              <textarea
+                id="input"
+                name="about"
+                placeholder="Tell us about yourself"
+                className="login-textarea"
+                value={formData.about}
+                onChange={handleChange}
+                required
+              ></textarea>
             </>
           )}
 
@@ -151,7 +146,7 @@ const Signup = () => {
                 required
               />
               <input
-              id="input"
+                id="input"
                 type="text"
                 placeholder="Your skills"
                 name="skills"
@@ -162,40 +157,44 @@ const Signup = () => {
               />
             </>
           )}
-    <p className="text-red-500 -translate-y-3 text-center">{Error}</p>
+
+          <p className="text-red-500 -translate-y-3 text-center">{Error}</p>
+
           <div className="flex justify-between gap-4">
-            {/* ✅ Back Button shown only after step 1 */}
-         
             {step > 1 && (
               <button
                 type="button"
                 onClick={handleBack}
                 className="login-button"
-                   style={{transform:'translate(0% , 20%)'}}
+                style={{ transform: "translate(0% , 20%)" }}
               >
                 Back
               </button>
             )}
-           
+
             <button
               type="submit"
               className={`w-full ${step > 1 ? "w-1/2" : "w-full"} login-button`}
-              style={{transform:'translate(0% , 20%)'}}
+              style={{ transform: "translate(0% , 20%)" }}
             >
-              {step < 3 ? ( "Next") :(<Link to = '/login' onClick = {Submit} >Sign Up</Link>) }
+              {step < 3 ? "Next" : "Sign Up"}
             </button>
           </div>
         </form>
 
-        {/* Progress Bar */}
         <div id="pb" className="mt-6">
           <div id="pb" className="w-full bg-gray-200 rounded-full h-3">
-            <div id="pb"
+            <div
+              id="pb"
               className="h-3 rounded-full transition-all duration-300"
-              style={{ width: `${progressPercent}%`, backgroundColor: "#191e24"  }}
+              style={{ width: `${progressPercent}%`, backgroundColor: "#191e24" }}
             ></div>
           </div>
-          <p id="pb" className="text-center  text-sm" style={{ color: "#191e24" }}>
+          <p
+            id="pb"
+            className="text-center  text-sm"
+            style={{ color: "#191e24" }}
+          >
             {progressPercent}% Completed
           </p>
         </div>

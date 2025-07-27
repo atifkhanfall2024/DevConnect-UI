@@ -20,7 +20,6 @@ const UserCard = ( {user} ) => {
            }
   }
  
- const {age} = user
 console.log(user+ 'cards')
   return (
     <div id="crd" className="flex justify-center items-center  from-blue-50 to-purple-100 p-8">
@@ -51,7 +50,7 @@ console.log(user+ 'cards')
            Age:<strong>{user.age} </strong> 
           </p>}
           <p> 
-            <strong>Location:</strong> Karachi, Pakistan
+          
           </p>
         </div>
 
