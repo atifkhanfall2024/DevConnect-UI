@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addConnections } from "../redux/connectionSlice"
 import No from "./NoFriend"
+import { Link } from "react-router-dom"
 
 const Connections = ()=>{
 
@@ -17,7 +18,7 @@ const Connections = ()=>{
          const res = await axios.get(BaseUrl + '/user/connections' , {withCredentials:true}
 
          )
-         console.log(res.data);
+      
          dispatch(addConnections(res?.data))
 
        }catch(err){
@@ -51,7 +52,7 @@ const Connections = ()=>{
       <div
         key={index}    style={{ backgroundColor: '#191e24' , border: '3px solid green' ,padding:'2px', margin:'2px' }}
         className="flex  justify-between items-center gap-4 bg-gray-50 hover:bg-gray-100 p-4 mb-4 rounded-md shadow-sm cursor-pointer transition-all duration-300"
-        onClick={() => console.log("Open profile of", connect.firstName)} // Replace with navigation if needed
+        //onClick={() => console.log("Open profile of", connect.firstName)} // Replace with navigation if needed
       >
         {/* Left: Friend Info */}
         <div className="flex-1">
@@ -65,7 +66,9 @@ const Connections = ()=>{
           alt={connect.firstName}
           className="w-20 h-20 object-cover rounded-md shadow"
         />
+         <Link to = {'/chat/'+ connect._id}><button className="w-20 h-10 bg-gradient-to-r from-pink-500 to-red-400 hover:from-pink-600 hover:to-red-500 text-white px-6 py-3 text-sm font-semibold rounded-full shadow-lg transition duration-300 transform hover:scale-105">Message</button></Link>
       </div>
+     
     ))}
   </div>
 </div>

@@ -12,6 +12,7 @@ import Signup from './components/Signup'
 import Forgot from './components/Forgotpass'
 import Connections from './components/Connection'
 import Request from './components/Request'
+import Chat from './components/Chat'
 function App() {
 const [loading, setLoading] = useState(() => {
     // Check if shimmer was already shown in this session
@@ -47,6 +48,7 @@ const [loading, setLoading] = useState(() => {
 <Route path='/forgotpassward' element = {<Forgot/>}/>
 <Route path='/connections' element = {<Connections/>}/>
 <Route path='/requests' element = {<Request/>}/>
+<Route path='/chat/:touserid' element = {<Chat/>}/>
 
 </Route>
  </Routes>
