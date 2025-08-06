@@ -296,3 +296,7 @@ input{
     border-color: transparent;
   }
 }
+.chat-scroll {
+  scroll-behavior: smooth;
+}
+

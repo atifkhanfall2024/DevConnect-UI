@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CreateSocketConnectionClient } from "../Utils/socket";
+import axios from "axios";
+import { BaseUrl } from "../Utils/constant";
 
 
 const Chat = () => {
@@ -10,6 +12,34 @@ const Chat = () => {
     const user = useSelector((store)=>store.user)
     const loginuser = user?._id;
     const {touserid} =  useParams();
+
+
+    // make an api call to see all messages 
+
+      const Chat = async()=>{
+         try{
+           const res = await axios.get(BaseUrl + '/chat/'+touserid ,{withCredentials:true}
+
+           )
+           console.log(res?.data?.messages);
+
+           const data = res?.data?.messages.map((msg)=>{
+            return{
+              name : msg?.senderId?.firstName,
+              text:msg?.text,
+              date:msg?.createdAt
+            }
+           })
+               setRecieve(data)
+         }catch(err){
+          console.log(err.message);
+         }
+      }
+
+        useEffect(()=>{
+          Chat()
+        } ,[])
+
 
        useEffect(()=>{
         if(!loginuser){return}
@@ -30,12 +60,12 @@ const Chat = () => {
         console.log('disconnect');
      }
 
-       } , [])
+       } , [loginuser , touserid])
 
        // handle send button
      //console.log('recieve',Recieve);
-       const HandleSendButton = async()=>{
-
+       const HandleSendButton = async(e)=>{
+                e.preventDefault()
         const socket = await CreateSocketConnectionClient()
 
         socket.emit('sendmessage' , {
@@ -47,6 +77,7 @@ const Chat = () => {
            
 
         })
+        setsendMessage('')
 
        }
 
@@ -68,7 +99,7 @@ const Chat = () => {
            
            
         { Recieve.map((msg , index)=>(
-       <div key={index} className="chat chat-start">
+       <div key={index} className={"chat " + (user.firstName === msg.name? "chat-end":'chat-start')}>
   <div className="chat-image avatar">
     <div className="w-10 rounded-full">
       <img
@@ -77,12 +108,14 @@ const Chat = () => {
       />
     </div>
   </div>
-  <div className="chat-header">
+  <div  className="chat-header">
     {msg.name}
-    <time className="text-xs opacity-50">{new Date().toLocaleTimeString()}</time>
+    <time  className="text-xs opacity-50 ">  {new Date(msg.date).toLocaleTimeString([], 
+      { hour: '2-digit', minute: '2-digit' })}  
+  — {new Date(msg.date).toLocaleDateString()}</time>
   </div>
   <div className="chat-bubble">{msg.text}</div>
-  <div className="chat-footer opacity-50">Delivered</div>
+  <div className="chat-footer opacity-50">Seen</div>
 </div>))}
 <div className="chat chat-end">
   <div className="chat-image avatar">
