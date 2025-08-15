@@ -9,9 +9,13 @@ import { BaseUrl } from "../Utils/constant";
 const Chat = () => {
     const [sendMessage , setsendMessage] = useState('')
     const [Recieve , setRecieve] = useState([])
+     const [OnlineUsers, setOnlineUsers] = useState([]);
+     const [limit , setlimit] = useState('')
     const user = useSelector((store)=>store.user)
     const loginuser = user?._id;
     const {touserid} =  useParams();
+
+
 
 
     // make an api call to see all messages 
@@ -25,6 +29,7 @@ const Chat = () => {
 
            const data = res?.data?.messages.map((msg)=>{
             return{
+              senderId: msg?.senderId?._id,
               name : msg?.senderId?.firstName,
               text:msg?.text,
               date:msg?.createdAt
@@ -49,12 +54,19 @@ const Chat = () => {
 
         socket.emit('joinchat' , {loginuser , touserid , name:user.firstName})
 
-        socket.on('recievemessage' , ({name , text})=>{
+        socket.on('recievemessage' , ({name , text , senderId})=>{
             //console.log( name , text);
-            setRecieve((Recieve)=>[...Recieve ,{name , text}])
+            setRecieve((Recieve)=>[...Recieve ,{name , text , senderId}])
         })
+
+        socket.emit('online' ,{loginuser} )
      // also close the connection when i move to other component or page
-       
+       socket.on("updateOnlineUsers", (users) => {
+      setOnlineUsers(users);
+    });
+
+      // or show it in a toast notification
+
      return ()=>{
         socket.disconnect()
         console.log('disconnect');
@@ -77,6 +89,8 @@ const Chat = () => {
            
 
         })
+          socket.on("errorMessage", (msg) => {
+        setlimit(msg)})
         setsendMessage('')
 
        }
@@ -88,18 +102,22 @@ const Chat = () => {
     <div  style={{transform:"translate(0% , -10%)"}} className="flex items-center justify-center min-h-screen bg-gray-900 px-4">
       <div className="w-full max-w-md p-6 bg-gray-800 rounded-2xl shadow-2xl border border-gray-700">
         {/* Header */}
-        <h2 className="text-white text-2xl font-bold text-center mb-4">
-          Live Chat 💬
+       <h2 className="text-white text-2xl font-bold text-center mb-4">
+          Live Chat 💬        {limit && (
+        <p style={{ color: "red", fontWeight: "bold" , fontSize:'60%' }}>
+          {limit} {alert(limit)}
+        </p>
+      )}
         </h2>
          
             <>
            
        
-        <div  className="bg-gray-900 h-64 overflow-y-auto rounded-xl p-4 mb-4 border border-gray-700 space-y-3">
+        <div   className="bg-gray-900 h-64 overflow-y-auto rounded-xl p-4 mb-4 border border-gray-700 space-y-3">
            
            
         { Recieve.map((msg , index)=>(
-       <div key={index} className={"chat " + (user.firstName === msg.name? "chat-end":'chat-start')}>
+       <div key={index} className={"chat " + (user.firstName === msg.name? "chat-end":'chat-start')} >{OnlineUsers.includes(msg.senderId) ? "🟢 Online" : "🔴 Offline"}
   <div className="chat-image avatar">
     <div className="w-10 rounded-full">
       <img
@@ -110,12 +128,12 @@ const Chat = () => {
   </div>
   <div  className="chat-header">
     {msg.name}
-    <time  className="text-xs opacity-50 ">  {new Date(msg.date).toLocaleTimeString([], 
+    <time  className="text-xs opacity-50 ">  {new Date(msg?.date).toLocaleTimeString([], 
       { hour: '2-digit', minute: '2-digit' })}  
-  — {new Date(msg.date).toLocaleDateString()}</time>
+  — {new Date(msg?.date).toLocaleDateString()}</time>
   </div>
   <div className="chat-bubble">{msg.text}</div>
-  <div className="chat-footer opacity-50">Seen</div>
+  <div className="chat-footer opacity-50">{OnlineUsers.includes(msg.senderId) ? "seen" : "delivered"}</div>
 </div>))}
 <div className="chat chat-end">
   <div className="chat-image avatar">

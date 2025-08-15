@@ -6,9 +6,14 @@ import { addConnections } from "../redux/connectionSlice"
 import No from "./NoFriend"
 import { Link } from "react-router-dom"
 
+
+
+
+
 const Connections = ()=>{
 
     const dispatch = useDispatch()
+  
     const connections = useSelector((store)=>store.connection)
     //console.log(connections , 'connect');
 
@@ -35,7 +40,6 @@ const Connections = ()=>{
         if(connections.length==0) return <No/>
 
          
-
         
     return(
         <>
@@ -56,8 +60,9 @@ const Connections = ()=>{
       >
         {/* Left: Friend Info */}
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-white text-center">{connect.firstName}</h3>
+          <h3 className="text-lg font-semibold text-white text-center">{connect.firstName} </h3>
           <p className="text-sm text-white text-center">{connect.about}</p>
+     
         </div>
 
         {/* Right: Friend Image */}
@@ -66,6 +71,7 @@ const Connections = ()=>{
           alt={connect.firstName}
           className="w-20 h-20 object-cover rounded-md shadow"
         />
+      
          <Link to = {'/chat/'+ connect._id}><button className="w-20 h-10 bg-gradient-to-r from-pink-500 to-red-400 hover:from-pink-600 hover:to-red-500 text-white px-6 py-3 text-sm font-semibold rounded-full shadow-lg transition duration-300 transform hover:scale-105">Message</button></Link>
       </div>
      
