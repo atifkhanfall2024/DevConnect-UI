@@ -51,6 +51,8 @@ const [loading, setLoading] = useState(() => {
 <Route path='/requests' element = {<Request/>}/>
 <Route path='/chat/:touserid' element = {<Chat/>}/>
 <Route path='/premium' element={<Premium/>}/>
+  <Route path="/success" element={<h1>Payment Successful ✅</h1>} />
+  <Route path="/cancel" element={<h1>Payment Cancelled ❌</h1>} />
 
 </Route>
  </Routes>
