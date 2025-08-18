@@ -7,6 +7,7 @@ import './App.css'
 import { Provider } from 'react-redux'
 import Feed from './components/Feed'
 import appStore from './redux/appstore'
+import Success from './components/SuccessMessage'
 import Profile from './components/profile'
 import Signup from './components/Signup'
 import Forgot from './components/Forgotpass'
@@ -51,7 +52,7 @@ const [loading, setLoading] = useState(() => {
 <Route path='/requests' element = {<Request/>}/>
 <Route path='/chat/:touserid' element = {<Chat/>}/>
 <Route path='/premium' element={<Premium/>}/>
-  <Route path="/success" element={<h1>Payment Successful ✅</h1>} />
+  <Route path="/success" element={<Success/>} />
   <Route path="/cancel" element={<h1>Payment Cancelled ❌</h1>} />
 
 </Route>

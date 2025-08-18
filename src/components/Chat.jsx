@@ -65,6 +65,10 @@ const Chat = () => {
       setOnlineUsers(users);
     });
 
+        socket.on("errorMessage", (msg) => {
+        setlimit(msg)})
+        setsendMessage('')
+
       // or show it in a toast notification
 
      return ()=>{
@@ -89,9 +93,7 @@ const Chat = () => {
            
 
         })
-          socket.on("errorMessage", (msg) => {
-        setlimit(msg)})
-        setsendMessage('')
+      
 
        }
 
